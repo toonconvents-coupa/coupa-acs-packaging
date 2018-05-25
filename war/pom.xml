@@ -14,6 +14,16 @@
     <properties>
         <scm-path>local/development/workspace</scm-path>
         <scm-revision>${buildNumber}</scm-revision>
+
+        <!-- Veracode properties -->
+        <veracode.action>${veracode.action}</veracode.action>
+        <veracode.createprofile>${veracode.createprofile}</veracode.createprofile>
+        <veracode.criticality>${veracode.criticality}</veracode.criticality>
+        <veracode.appname>${veracode.appname}</veracode.appname>
+        <veracode.filepath>${project.build.directory}/alfresco.war</veracode.filepath>
+        <veracode.vuser>${veracode.vuser}</veracode.vuser>
+        <veracode.vpassword>${veracode.vpassword}</veracode.vpassword>
+        <veracode.sandboxname>${veracode.sandboxname}</veracode.sandboxname>
     </properties>
 
     <dependencies>
@@ -357,4 +367,59 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>veracodeScan</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.8</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <configuration>
+                                    <target name="VeracodeUploadAndScan" description="Turns on debug symbols, logging.
+                                                                              Cleans, builds, uploads binaries.
+                                                                              Starts scan">
+                                        <property name="veracode.action" value="${veracode.action}"/>
+                                        <property name="veracode.createprofile" value="${veracode.createprofile}"/>
+                                        <property name="veracode.criticality" value="${veracode.criticality}"/>
+                                        <property name="veracode.appname" value="${veracode.appname}"/>
+                                        <property name="veracode.filepath" value="${veracode.filepath}"/>
+                                        <property name="veracode.vuser" value="${veracode.vuser}"/>
+                                        <property name="veracode.vpassword" value="${veracode.vpassword}"/>
+                                        <property name="veracode.sandboxname" value="${.veracode.sandboxname}"/>
+
+                                        <!-- Create a timestamp value to use for the build id -->
+                                        <tstamp>
+                                            <format property="current.time" pattern="yyyyMMdd-kmmssS" />
+                                        </tstamp>
+                                        <!-- Log all output to veracode.log file -->
+                                        <record name="veracode_${current.time}.log" loglevel="verbose" append="false"/>
+                                        <!-- Call the Veracode API to upload and scan -->
+                                        <java jar="${project.basedir}/VeracodeJavaAPI.jar" fork="true">
+                                            <arg line=" -action ${veracode.action}
+                                                           -vuser ${veracode.vuser}
+                                                           -vpassword ${veracode.vpassword}
+                                                           -criticality ${veracode.criticality}
+                                                           -createprofile ${veracode.createprofile}
+                                                           -version ${current.time}
+                                                           -appname '${veracode.appname}'
+                                                           -sandboxname '${veracode.sandboxname}'
+                                                           -filepath ${veracode.filepath}"/>
+                                        </java>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
