@@ -20,6 +20,9 @@ COPY ${resource_path}/alfresco-mmt/* /usr/local/tomcat/alfresco-mmt/
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
 COPY ${resource_path}/server-root/* /usr/local/tomcat/webapps
 COPY ${resource_path}/vti-bin/* /usr/local/tomcat/webapps
+RUN mkdir /usr/local/tomcat/alf_data
+RUN mkdir /usr/local/tomcat/alf_data/keystore
+COPY ${resource_path}/alfresco/keystore/* /usr/local/tomcat/alf_data/keystore/
 
 # Change the value of the shared.loader= property to the following:
 # shared.loader=${catalina.base}/shared/classes
