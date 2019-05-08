@@ -68,7 +68,10 @@
         <alfresco.googledocs.version>3.1.0</alfresco.googledocs.version>
 
         <!-- Alfresco S3 Connector integration version -->
-        <alfresco.s3connector.version>2.3.0</alfresco.s3connector.version>
+        <alfresco.s3connector.version>repo-4345-1</alfresco.s3connector.version>
+
+        <!-- Alfresco Azure Blob Storage Connector integration version -->
+        <alfresco.azure-blob-storage-connector.version>0.1</alfresco.azure-blob-storage-connector.version>
 
         <!-- Alfresco Glacier Connector Repo version -->
         <alfresco.glacier-connector.version>1.0.0</alfresco.glacier-connector.version>
@@ -547,6 +550,12 @@
                 <groupId>org.alfresco.integrations</groupId>
                 <artifactId>alfresco-s3-connector</artifactId>
                 <version>${alfresco.s3connector.version}</version>
+                <type>amp</type>
+            </dependency>
+            <dependency>
+                <groupId>org.alfresco.integrations</groupId>
+                <artifactId>azure-blob-storage-connector</artifactId>
+                <version>${alfresco.azure-blob-storage-connector.version}</version>
                 <type>amp</type>
             </dependency>
             <dependency>
