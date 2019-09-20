@@ -261,6 +261,7 @@
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}/amps_share</outputDirectory>
                                 </artifactItem>
+                                <!-- not tested/supported for ACS 6.x
                                 <artifactItem>
                                     <groupId>org.alfresco.module.KofaxAddon</groupId>
                                     <artifactId>kofaxaddon</artifactId>
@@ -269,6 +270,7 @@
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}/amps</outputDirectory>
                                 </artifactItem>
+                                -->
                                 <artifactItem>
                                     <groupId>org.alfresco.services.sync</groupId>
                                     <artifactId>alfresco-device-sync-repo</artifactId>

@@ -81,7 +81,9 @@
         <alfresco.salesforce-connector.version>2.1.0</alfresco.salesforce-connector.version>
 
         <!-- Alfresco Kofax Connector version -->
+        <!-- not tested/supported for ACS 6.x
         <alfresco.kofax.version>2.0.0</alfresco.kofax.version>
+        -->
 
         <!-- SAML Single Sign-On (SSO) for Alfresco Content Services -->
         <alfresco.saml.version>1.2.0-RC1</alfresco.saml.version>
@@ -585,12 +587,14 @@
                 <version>${alfresco.salesforce-connector.version}</version>
                 <type>amp</type>
             </dependency>
+            <!-- not tested/supported for ACS 6.x
             <dependency>
                 <groupId>org.alfresco.module.KofaxAddon</groupId>
                 <artifactId>kofaxaddon</artifactId>
                 <version>${alfresco.kofax.version}</version>
                 <type>amp</type>
             </dependency>
+            -->
             <dependency>
                 <groupId>org.alfresco.services.sync</groupId>
                 <artifactId>alfresco-device-sync-repo</artifactId>
