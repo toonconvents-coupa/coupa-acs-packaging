@@ -15,6 +15,10 @@ COPY target/war ${TOMCAT_DIR}/webapps
 COPY custom-content-service-context.xml ${TOMCAT_DIR}/shared/classes/alfresco/extension/
 COPY share-config.xml ${TOMCAT_DIR}/webapps/share/WEB-INF/classes/alfresco/
 
+RUN rm ${TOMCAT_DIR}/webapps/share/WEB-INF/lib/jackson-annotations-2.9.0.jar
+RUN rm ${TOMCAT_DIR}/webapps/share/WEB-INF/lib/jackson-databind-2.9.5.jar
+RUN rm ${TOMCAT_DIR}/webapps/share/WEB-INF/libjackson-core-2.9.5.jar
+
 # set the correct path for alfresco.log
 RUN sed -i -e "s_log4j.appender.File.File\=alfresco.log_log4j.appender.File.File\=${TOMCAT_DIR}/logs\/alfresco.log_" \
         ${TOMCAT_DIR}/webapps/alfresco/WEB-INF/classes/log4j.properties && \
