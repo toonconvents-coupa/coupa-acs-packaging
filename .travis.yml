@@ -19,6 +19,7 @@ branches:
   only:
     - master
     - /support\/.*/
+    - bump_alfresco-repository
 
 env:
   global:
