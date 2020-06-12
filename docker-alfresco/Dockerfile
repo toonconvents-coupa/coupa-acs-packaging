@@ -1,6 +1,6 @@
 # Fetch image based on Tomcat 8.5.34 and Java 11
 # More infos about this image: https://github.com/Alfresco/alfresco-docker-base-tomcat
-FROM alfresco/alfresco-base-tomcat:8.5.34-java-11-openjdk-centos-7
+FROM alfresco/alfresco-base-tomcat:8.5.34-java-8-oracle-centos-7
 
 # Set default docker_context. Will / Can be overriden with maven.
 ARG resource_path=target
@@ -20,6 +20,9 @@ COPY ${resource_path}/alfresco-mmt/* /usr/local/tomcat/alfresco-mmt/
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
 COPY ${resource_path}/server-root/* /usr/local/tomcat/webapps
 COPY ${resource_path}/vti-bin/* /usr/local/tomcat/webapps
+
+# Up the Tomcat cache
+RUN sed -i 's/<\/Context>/\n<Resources cachingAllowed="true" cacheMaxSize="100000" \/>\n<\/Context>/' /usr/local/tomcat/conf/context.xml
 
 # Change the value of the shared.loader= property to the following:
 # shared.loader=${catalina.base}/shared/classes
@@ -58,4 +61,4 @@ RUN mkdir /usr/local/tomcat/webapps/_vti_bin && cd /usr/local/tomcat/webapps/_vt
 
 # To remote debug into this image add: EXPOSE 8000
 # Changes are also required to the docker-compose/docker-compose.yml file.
-# EXPOSE 8000
+EXPOSE 8001

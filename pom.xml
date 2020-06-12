@@ -3,7 +3,7 @@
     <artifactId>acs-packaging</artifactId>
     <packaging>pom</packaging>
     <name>Alfresco Content Services Packaging</name>
-    <version>6.0.1.4</version>
+    <version>6.0.1.4-coupa</version>
 
     <parent>
         <groupId>org.alfresco</groupId>
@@ -30,6 +30,8 @@
     </distributionManagement>
 
     <properties>
+        <acs-version>6.0.1.4</acs-version>
+
         <!-- Set to "Enterprise Early Access" to add to the version.edition property in version.properties -->
         <version.edition>Enterprise</version.edition>
         <image.tag>latest</image.tag>
